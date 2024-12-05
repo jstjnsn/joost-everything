@@ -22,6 +22,14 @@ export class ExpensesComponent {
 
   addExpense(event: Event) {
     event.preventDefault();
+    if (
+      !this.newExpenseName ||
+      !this.newExpenseAmount ||
+      !this.newExpenseDate ||
+      !this.newExpenseCategory
+    ) {
+      return;
+    }
     this.expenses.update((expenses) => [
       ...expenses,
       {
