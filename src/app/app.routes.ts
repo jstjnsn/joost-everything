@@ -16,4 +16,8 @@ export const routes: Routes = [
     path: 'expenses-modern',
     component: ExpensesModernComponent,
   },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];

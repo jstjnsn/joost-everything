@@ -24,7 +24,6 @@
 </form>
 
 <p *ngFor="let expense of expenses()">
-  {{ expense.name }} - {{ expense.amount }} -
-  {{ expense.date | date : "dd/MM/yyyy" }} -
+  {{ expense.name }} - {{ expense.amount }} - {{ expense.date }} -
   {{ expense.category }}
 </p>

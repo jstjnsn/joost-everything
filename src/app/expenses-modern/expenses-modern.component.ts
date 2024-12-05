@@ -3,6 +3,7 @@ import { Component, effect, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { expenseCategories } from '../shared/constants';
 import { Expense, ExpenseCategory } from '../shared/types';
+import { getTodayDateString } from '../shared/utils/date';
 
 @Component({
   standalone: true,
@@ -22,7 +23,7 @@ export class ExpensesModernComponent {
   expensesForm = new FormGroup({
     name: new FormControl(''),
     amount: new FormControl(0),
-    date: new FormControl(new Date(Date.now())),
+    date: new FormControl(getTodayDateString()),
     category: new FormControl(''),
   });
 

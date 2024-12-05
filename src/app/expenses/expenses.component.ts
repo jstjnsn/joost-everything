@@ -3,6 +3,7 @@ import { Component, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { expenseCategories } from '../shared/constants';
 import { Expense, ExpenseCategory } from '../shared/types';
+import { getTodayDateString } from '../shared/utils/date';
 
 @Component({
   standalone: true,
@@ -21,7 +22,7 @@ export class ExpensesComponent {
 
   newExpenseName = '';
   newExpenseAmount = 0;
-  newExpenseDate = new Date();
+  newExpenseDate = getTodayDateString();
   newExpenseCategory = '';
 
   constructor() {

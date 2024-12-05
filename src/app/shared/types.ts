@@ -3,7 +3,7 @@ import { expenseCategories } from './constants';
 export type Expense = {
   name: string;
   amount: number;
-  date: Date;
+  date: string;
   category: string;
 };
 
