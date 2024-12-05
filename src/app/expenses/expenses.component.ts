@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { expenseCategories } from '../shared/constants';
+import { expenseCategories, EXPENSES_STORAGE_KEY } from '../shared/constants';
 import { Expense, ExpenseCategory } from '../shared/types';
 import { getTodayDateString } from '../shared/utils/date';
 
@@ -14,7 +14,7 @@ import { getTodayDateString } from '../shared/utils/date';
 })
 export class ExpensesComponent {
   expenses = signal<Expense[]>(
-    localStorage.getItem('expenses')
+    localStorage.getItem(EXPENSES_STORAGE_KEY)
       ? JSON.parse(localStorage.getItem('expenses') as string)
       : []
   );
@@ -27,7 +27,10 @@ export class ExpensesComponent {
 
   constructor() {
     effect(() => {
-      localStorage.setItem('expenses', JSON.stringify(this.expenses()));
+      localStorage.setItem(
+        EXPENSES_STORAGE_KEY,
+        JSON.stringify(this.expenses())
+      );
     });
   }
 

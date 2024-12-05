@@ -1,4 +1,4 @@
-<form (submit)="addExpense($event)">
+<form (ngSubmit)="addExpense($event)">
   <label>
     <p>Name</p>
     <input type="text" name="name" [(ngModel)]="newExpenseName" />
