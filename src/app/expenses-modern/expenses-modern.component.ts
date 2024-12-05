@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { expenseCategories } from '../shared/constants';
 import { Expense, ExpenseCategory } from '../shared/types';
@@ -12,6 +12,13 @@ import { Expense, ExpenseCategory } from '../shared/types';
   styleUrl: './expenses-modern.component.scss',
 })
 export class ExpensesModernComponent {
+  expenses = signal<Expense[]>(
+    localStorage.getItem('expenses')
+      ? JSON.parse(localStorage.getItem('expenses') as string)
+      : []
+  );
+  expenseCategories = signal<ExpenseCategory[]>(expenseCategories);
+
   expensesForm = new FormGroup({
     name: new FormControl(''),
     amount: new FormControl(0),
@@ -19,8 +26,11 @@ export class ExpensesModernComponent {
     category: new FormControl(''),
   });
 
-  expenses = signal<Expense[]>([]);
-  expenseCategories = signal<ExpenseCategory[]>(expenseCategories);
+  constructor() {
+    effect(() => {
+      localStorage.setItem('expenses', JSON.stringify(this.expenses()));
+    });
+  }
 
   addExpense(event: Event) {
     event.preventDefault();

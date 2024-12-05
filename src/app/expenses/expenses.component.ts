@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { expenseCategories } from '../shared/constants';
 import { Expense, ExpenseCategory } from '../shared/types';
@@ -12,13 +12,23 @@ import { Expense, ExpenseCategory } from '../shared/types';
   styleUrl: './expenses.component.scss',
 })
 export class ExpensesComponent {
-  expenses = signal<Expense[]>([]);
+  expenses = signal<Expense[]>(
+    localStorage.getItem('expenses')
+      ? JSON.parse(localStorage.getItem('expenses') as string)
+      : []
+  );
   expenseCategories = signal<ExpenseCategory[]>(expenseCategories);
 
   newExpenseName = '';
   newExpenseAmount = 0;
   newExpenseDate = new Date();
   newExpenseCategory = '';
+
+  constructor() {
+    effect(() => {
+      localStorage.setItem('expenses', JSON.stringify(this.expenses()));
+    });
+  }
 
   addExpense(event: Event) {
     event.preventDefault();
