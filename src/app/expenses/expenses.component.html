@@ -1,0 +1,30 @@
+<form (submit)="addExpense($event)">
+  <label>
+    <p>Name</p>
+    <input type="text" name="name" [(ngModel)]="newExpenseName" />
+  </label>
+  <label>
+    <p>Amount</p>
+    <input type="number" name="amount" [(ngModel)]="newExpenseAmount" />
+  </label>
+  <label>
+    <p>Date</p>
+    <input type="date" name="date" [(ngModel)]="newExpenseDate" />
+  </label>
+  <label>
+    <p>Category</p>
+    <select name="category" id="category" [(ngModel)]="newExpenseCategory">
+      <option value="">Choose a category</option>
+      <option [value]="category" *ngFor="let category of expenseCategories()">
+        {{ category }}
+      </option>
+    </select>
+  </label>
+  <button type="submit">Add</button>
+</form>
+
+<p *ngFor="let expense of expenses()">
+  {{ expense.name }} - {{ expense.amount }} -
+  {{ expense.date | date : "dd/MM/yyyy" }} -
+  {{ expense.category }}
+</p>

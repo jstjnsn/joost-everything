@@ -1,0 +1,29 @@
+<h1>Joost Everything</h1>
+
+<nav>
+  <ul>
+    <li>
+      <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"
+        >Home</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/expenses"
+        routerLinkActive="inactive"
+        ariaCurrentWhenActive="page"
+        >Expenses</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/expenses-modern"
+        routerLinkActive="inactive"
+        ariaCurrentWhenActive="page"
+        >Expenses Modern</a
+      >
+    </li>
+  </ul>
+</nav>
+
+<router-outlet />

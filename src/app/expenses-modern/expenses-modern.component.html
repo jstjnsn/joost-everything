@@ -1,0 +1,30 @@
+<form [formGroup]="expensesForm" (ngSubmit)="addExpense($event)">
+  <label>
+    <p>Name</p>
+    <input type="text" formControlName="name" />
+  </label>
+  <label>
+    <p>Amount</p>
+    <input type="number" formControlName="amount" />
+  </label>
+  <label>
+    <p>Date</p>
+    <input type="date" formControlName="date" />
+  </label>
+  <label>
+    <p>Category</p>
+    <select formControlName="category">
+      <option value="">Choose a category</option>
+      <option *ngFor="let category of expenseCategories()" [value]="category">
+        {{ category }}
+      </option>
+    </select>
+  </label>
+  <button type="submit" [disabled]="!expensesForm.valid">Add</button>
+</form>
+
+<p *ngFor="let expense of expenses()">
+  {{ expense.name }} - {{ expense.amount }} -
+  {{ expense.date | date : "dd/MM/yyyy" }} -
+  {{ expense.category }}
+</p>
